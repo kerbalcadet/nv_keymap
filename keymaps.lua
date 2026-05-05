@@ -5,7 +5,7 @@
 
 vim.api.nvim_create_user_command(
   "PushKeymap",
-  "!(cd ~/.dotfiles/keymaps/ && git add . && git commit -m 'auto' && git push)",
+  "silent !(cd ~/.dotfiles/keymaps/ && git add . && git commit -m 'auto' && git push)",
   {}
 )
 vim.api.nvim_create_user_command("PullKeymap", "silent !(cd ~/.dotfiles/keymaps/ && git -q pull)", {})
