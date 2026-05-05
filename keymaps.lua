@@ -4,10 +4,11 @@
 
 vim.api.nvim_create_user_command(
   "PushKeymap",
-  "!(cd /home/nick/.dotfiles/keymaps/ && git add . && git commit -m 'auto' && git push)",
+  "!(cd ~/.dotfiles/keymaps/ && git add . && git commit -m 'auto' && git push)",
   {}
 )
-vim.api.nvim_create_user_command("PullKeymap", "!(cd /home/nick/.dotfiles/keymaps/ && git  pull)", {})
+vim.api.nvim_create_user_command("PullKeymap", "silent !(cd ~/.dotfiles/keymaps/ && git -q pull)", {})
+vim.cmd("PullKeymap")
 
 vim.keymap.set("t", "<C-n>", "<C-\\><C-n>")
 vim.keymap.set("n", "<leader>gg", ":LazyGit<CR>")
