@@ -2,6 +2,13 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
+vim.api.nvim_create_user_command(
+  "PushKeymap",
+  "!(cd /home/nick/.dotfiles/keymaps/ && git add . && git commit -m 'auto' && git push)",
+  {}
+)
+vim.api.nvim_create_user_command("PullKeymap", "!(cd /home/nick/.dotfiles/keymaps/ && git  pull)", {})
+
 vim.keymap.set("t", "<C-n>", "<C-\\><C-n>")
 vim.keymap.set("n", "<leader>gg", ":LazyGit<CR>")
 vim.keymap.set("n", "<M-w>", function()
