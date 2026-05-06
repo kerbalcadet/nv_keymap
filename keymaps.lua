@@ -17,8 +17,8 @@ vim.keymap.set("n", "<M-w>", function()
 end)
 vim.keymap.set("n", "<M-q>", "ZZ")
 vim.keymap.set("n", "sb", "<cmd>set scb<cr>")
-vim.keymap.set({ "n", "x" }, "<M-f>", ":%s/<C-r>+//g<left><left>")
-vim.keymap.set({ "n", "x" }, "<M-F>", "0k/<C-r>+<cr>")
+vim.keymap.set("n", "<M-f>", ":%s/<C-r>+//g<left><left>")
+vim.keymap.set("x", "<M-f>", "0k/<C-r>+<cr>")
 vim.keymap.set("n", "<F2>", vim.lsp.buf.rename)
 
 -- switch left/right
