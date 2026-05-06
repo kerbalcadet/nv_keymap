@@ -25,3 +25,8 @@ vim.keymap.set("n", "<F2>", vim.lsp.buf.rename)
 -- switch left/right
 vim.keymap.set("n", "<M-h>", "xhP")
 vim.keymap.set("n", "<M-l>", "xp")
+
+vim.keymap.set("x", "<M-h>", "ygvxhP/<C-r>+<cr>vgn")
+vim.keymap.set("x", "<M-H>", "ygvxBP/<C-r>+<cr>vgn")
+vim.keymap.set("x", "<M-l>", "ygvxp/<C-r>+<cr>vgn")
+vim.keymap.set("x", "<M-L>", "ygvxEp/<C-r>+<cr>vgn")
