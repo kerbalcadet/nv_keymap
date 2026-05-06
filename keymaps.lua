@@ -9,6 +9,7 @@ vim.api.nvim_create_user_command(
 )
 vim.api.nvim_create_user_command("PullKeymap", "silent !(cd ~/.dotfiles/keymaps/ && git pull)", {})
 vim.cmd("PullKeymap")
+vim.cmd("PushKeymap")
 
 vim.keymap.set("t", "<C-n>", "<C-\\><C-n>")
 vim.keymap.set("n", "<leader>gg", ":LazyGit<CR>")
@@ -18,7 +19,7 @@ end)
 vim.keymap.set("n", "<M-q>", "ZZ")
 vim.keymap.set("n", "sb", "<cmd>set scb<cr>")
 vim.keymap.set("n", "<M-f>", ":%s/<C-r>+//g<left><left>")
-vim.keymap.set("x", "<M-f>", "0k/<C-r>+<cr>")
+vim.keymap.set("x", "<M-f>", "y0k/<C-r>+<cr>")
 vim.keymap.set("n", "<F2>", vim.lsp.buf.rename)
 
 -- switch left/right
