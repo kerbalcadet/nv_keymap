@@ -22,6 +22,10 @@ vim.keymap.set("n", "<M-f>", ":%s/<C-r>+//g<left><left>")
 vim.keymap.set("x", "<M-f>", "y0k/<C-r>+<cr>")
 vim.keymap.set("n", "<F2>", vim.lsp.buf.rename)
 
+-- move buffers
+vim.keymap.set("n", "<M-H>", "<cmd>BufferLineMovePrev<cr>")
+vim.keymap.set("n", "<M-L>", "<cmd>BufferLineMoveNext<cr>")
+
 -- switch left/right
 vim.keymap.set("n", "<M-h>", "xhP")
 vim.keymap.set("n", "<M-l>", "xp")
