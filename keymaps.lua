@@ -53,9 +53,11 @@ local function start_search_offset()
   local cursor_row, cursor_col = unpack(vim.api.nvim_win_get_cursor(0))
   local _, match_col = unpack(vim.fn.searchpos(pattern, "Wn"))
 
-  offset = (cursor_col + 1) - match_col
+  if match_col == 0 then
+    return
+  end
 
-  vim.cmd("normal! <esc>")
+  offset = (cursor_col + 1) - match_col
 end
 
 local function next_search_offset()
@@ -65,6 +67,10 @@ local function next_search_offset()
 
   local pattern = literal_pattern(search_text)
   local row, col = unpack(vim.fn.searchpos(pattern, "W"))
+
+  if row == 0 or col == 0 then
+    return
+  end
 
   vim.api.nvim_win_set_cursor(0, {
     row,
