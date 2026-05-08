@@ -18,8 +18,6 @@ vim.keymap.set("n", "<M-w>", function()
 end)
 vim.keymap.set("n", "<M-q>", "ZZ")
 vim.keymap.set("n", "sb", "<cmd>set scb<cr>")
-vim.keymap.set("n", "<M-f>", ":%s/<C-r>+//g<left><left>")
-vim.keymap.set("x", "<M-f>", "y0k/<C-r>+<cr>")
 vim.keymap.set("n", "<F2>", vim.lsp.buf.rename)
 
 -- highlight word
@@ -38,3 +36,7 @@ vim.keymap.set("x", "<M-h>", "ygvxhP/<C-r>+<cr>vgn")
 vim.keymap.set("x", "<M-H>", "ygvxBP/<C-r>+<cr>vgn")
 vim.keymap.set("x", "<M-l>", "ygvxp/<C-r>+<cr>vgn")
 vim.keymap.set("x", "<M-L>", "ygvxEp/<C-r>+<cr>vgn")
+
+-- search / ctrl+d ish
+vim.keymap.set("x", "<M-/", "yh/<C-r>+<cr>`>")
+vim.keymap.set("n", "<M-n>", "vgn<esc>`>")
