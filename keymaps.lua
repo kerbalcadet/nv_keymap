@@ -39,4 +39,4 @@ vim.keymap.set("x", "<M-L>", "ygvxEp/<C-r>+<cr>vgn")
 
 -- search / ctrl+d ish
 vim.keymap.set("x", "<M-/>", "yh/<C-r>+<cr>`><esc>")
-vim.keymap.set("n", "<M-n>", ":echo 'test'<cr>")
+vim.keymap.set("n", "<esc>n", ":echo 'test'<cr>")
