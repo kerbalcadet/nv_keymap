@@ -41,22 +41,28 @@ vim.keymap.set("x", "<M-L>", "ygvxEp/<C-r>+<cr>vgn")
 local search_text = ""
 local offset = 0
 
-local function literal_pattern(str)
+local function esc(str)
   return "\\V" .. str:gsub("\\", "\\\\")
 end
 
+local function get_selected_text()
+  return table.concat(vim.fn.getregion(vim.fn.getpos("'<"), vim.fn.getpos("'>"), { type = "v" }), "\n")
+end
+
 local function start_search_offset()
-  search_text = table.concat(vim.fn.getregion(vim.fn.getpos("'<"), vim.fn.getpos("'>"), { type = "v" }), "\n")
+  search_text = get_selected_text()
+  if search_text == "" then
+    return
+  end
 
-  local pattern = literal_pattern(search_text)
+  local pattern = esc(search_text)
 
-  local cursor_row, cursor_col = unpack(vim.api.nvim_win_get_cursor(0))
   local _, match_col = unpack(vim.fn.searchpos(pattern, "Wn"))
-
   if match_col == 0 then
     return
   end
 
+  local _, cursor_col = unpack(vim.api.nvim_win_get_cursor(0))
   offset = (cursor_col + 1) - match_col
 end
 
@@ -65,9 +71,7 @@ local function next_search_offset()
     return
   end
 
-  local pattern = literal_pattern(search_text)
-  local row, col = unpack(vim.fn.searchpos(pattern, "W"))
-
+  local row, col = unpack(vim.fn.searchpos(esc(search_text), "W"))
   if row == 0 or col == 0 then
     return
   end
