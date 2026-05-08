@@ -38,5 +38,19 @@ vim.keymap.set("x", "<M-l>", "ygvxp/<C-r>+<cr>vgn")
 vim.keymap.set("x", "<M-L>", "ygvxEp/<C-r>+<cr>vgn")
 
 -- search / ctrl+d ish
-vim.keymap.set("x", "<C-/>", "yh/<C-r>+<cr>`><esc>")
-vim.keymap.set("n", "<C-n>", "lgn<esc>")
+local search_text = ""
+local offset = 0
+local function start_search_offset()
+  search_text = vim.fn.getreg("v")
+  local c_col = vim.api.nvim_win_get_cursor(0)[1]
+  local p_col = vim.fn.searchpos(search_text, "W")
+  offset = c_col - p_col
+end
+
+local function next_search_offset()
+  local row, col, _ = unpack(vim.fn.searchpos(search_text, "W"))
+  vim.api.nvim_win_set_cursor(0, { row, col + offset })
+end
+
+vim.keymap.set("x", "<C-/>", start_search_offset)
+vim.keymap.set("n", "<C-n>", next_search_offset)
