@@ -41,8 +41,7 @@ vim.keymap.set("x", "<M-L>", "ygvxEp/<C-r>+<cr>vgn")
 local search_text = ""
 local offset = 0
 local function start_search_offset()
-  search_text =
-    table.concat(vim.fn.getregion(vim.fn.getpos("'<"), vim.fn.getpos("'>"), { type = "", exclusive = false }), "\n")
+  search_text = table.concat(vim.fn.getregion(vim.fn.getpos("'<"), vim.fn.getpos("'>"), { type = "v" }), "\n")
   local c_col = vim.api.nvim_win_get_cursor(0)[2]
   local p_col = vim.fn.searchpos(search_text, "W")[2]
   offset = c_col - p_col
