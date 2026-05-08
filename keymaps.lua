@@ -40,17 +40,27 @@ vim.keymap.set("x", "<M-L>", "ygvxEp/<C-r>+<cr>vgn")
 -- search / ctrl+d ish
 local search_text = ""
 local offset = 0
+
 local function start_search_offset()
   search_text = table.concat(vim.fn.getregion(vim.fn.getpos("'<"), vim.fn.getpos("'>"), { type = "v" }), "\n")
+
+  local pattern = vim.fn.escape(search_text, [[/\^$.*[]~]])
+
   local c_col = vim.api.nvim_win_get_cursor(0)[2]
-  local p_col = vim.fn.searchpos(search_text, "W")[2]
-  offset = c_col - p_col
+
+  local p_col = vim.fn.searchpos(pattern, "Wn")[2]
+
+  offset = (c_col + 1) - p_col
+
   vim.cmd("normal! <esc>")
 end
 
 local function next_search_offset()
-  local row, col, _ = unpack(vim.fn.searchpos(search_text, "W"))
-  vim.api.nvim_win_set_cursor(0, { row, col + offset })
+  local pattern = vim.fn.escape(search_text, [[/\^$.*[]~]])
+
+  local row, col = unpack(vim.fn.searchpos(pattern, "W"))
+
+  vim.api.nvim_win_set_cursor(0, { row, col + offset - 1 })
 end
 
 vim.keymap.set("x", "<C-/>", start_search_offset)
