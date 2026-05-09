@@ -41,8 +41,16 @@ vim.keymap.set("x", "<M-L>", "ygvxEp/<C-r>+<cr>vgn")
 local search_text = ""
 local offset = 0
 
-local function next_search_offset()
-  local row, col, _ = unpack(vim.fn.searchpos(search_text, "W"))
+local function next_search_offset(fwd)
+  fwd = fwd or true
+  local row
+  local col
+  if fwd then
+    row, col, _ = unpack(vim.fn.searchpos(search_text, "W"))
+  else
+    row, col, _ = unpack(vim.fn.searchpos(search_text, "bW"))
+  end
+
   vim.api.nvim_win_set_cursor(0, { row, col + offset })
 end
 
@@ -63,4 +71,10 @@ end
 
 vim.keymap.set("n", "<C-/>", start_search_offset, { remap = true })
 vim.keymap.set("n", "<C-M-/>", start_yanked_search_offset, { remap = true })
-vim.keymap.set("n", "<C-n>", next_search_offset, { remap = true })
+vim.keymap.set("n", "<C-n>", function()
+  next_search_offset(true)
+end, { remap = true })
+
+vim.keymap.set("n", "<C-N>", function()
+  next_search_offset(false)
+end, { remap = true })
