@@ -44,8 +44,11 @@ local offset = 0
 local function next_search_offset(fwd)
   fwd = (fwd == nil) and true or false
 
-  local search_char = fwd and "/" or "?"
-  vim.cmd(search_char .. search_text .. "/b+" .. offset)
+  if fwd then
+    vim.cmd("/" .. search_text .. "/s+" .. offset)
+  else
+    vim.cmd("?" .. search_text .. "?b_" .. offset)
+  end
 end
 
 local function start_search_offset(search_text_)
