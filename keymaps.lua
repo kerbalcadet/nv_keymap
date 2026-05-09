@@ -44,7 +44,7 @@ local function start_search_offset()
   search_text = vim.fn.getreg("s")
   local c_col = vim.api.nvim_win_get_cursor(0)[2]
   local p_col = vim.fn.searchpos(search_text, "cn")[2]
-  --offset = c_col - p_col
+  offset = c_col - p_col
   --vim.cmd("normal! <esc>")
 end
 
