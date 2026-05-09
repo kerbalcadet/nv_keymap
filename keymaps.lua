@@ -51,7 +51,7 @@ local function next_search_offset(fwd)
     vim.api.nvim_win_set_cursor(0, { cpos[1], cpos[2] - offset - 1 })
   end
 
-  local flags = fwd and "W" or "bW"
+  local flags = fwd and "" or "b"
   local spos = vim.fn.searchpos(search_text, flags)
   vim.api.nvim_win_set_cursor(0, { spos[1], spos[2] + offset })
 end
@@ -64,7 +64,6 @@ local function start_search_offset(search_text_)
   offset = c_col - p_col
 
   vim.api.nvim_win_set_cursor(0, { c_row, c_col })
-  --vim.cmd("normal <esc>")
   vim.fn.setreg("/", search_text)
   vim.cmd("set hlsearch")
 end
