@@ -46,9 +46,14 @@ local function next_search_offset(fwd)
     fwd = false
   end
 
+  if not fwd then
+    local cpos = vim.api.nvim_win_get_cursor(0)
+    vim.api.nvim_win_set_cursor(0, { cpos[1], cpos[0] - offset - 1 })
+  end
+
   local flags = fwd and "W" or "bW"
-  local pos = vim.fn.searchpos(search_text, flags)
-  vim.api.nvim_win_set_cursor(0, { pos[1], pos[2] + offset })
+  local spos = vim.fn.searchpos(search_text, flags)
+  vim.api.nvim_win_set_cursor(0, { spos[1], spos[2] + offset })
 end
 
 local function start_search_offset(search_text_)
