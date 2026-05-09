@@ -43,15 +43,10 @@ local offset = 0
 
 local function next_search_offset(fwd)
   fwd = fwd or true
-  local row
-  local col
+  local search_char = fwd and "/" or "?"
   if fwd then
-    row, col, _ = unpack(vim.fn.searchpos(search_text, "W"))
-  else
-    row, col, _ = unpack(vim.fn.searchpos(search_text, "bW"))
+    vim.cmd(search_char .. search_text .. "/b+" .. offset)
   end
-
-  vim.api.nvim_win_set_cursor(0, { row, col + offset })
 end
 
 local function start_search_offset(search_text_)
@@ -60,11 +55,11 @@ local function start_search_offset(search_text_)
   local c_col = vim.api.nvim_win_get_cursor(0)[2]
   local p_col = vim.fn.searchpos(search_text, "bcW")[2]
   offset = c_col - p_col
+
   vim.cmd.normal({ args = { "<esc>" } })
   vim.fn.setreg("/", search_text)
   vim.cmd("set hlsearch")
-
-  next_search_offset()
+  vim.cmd.normal(offset .. "l")
 end
 
 local function start_yanked_search_offset()
