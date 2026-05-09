@@ -53,5 +53,5 @@ local function next_search_offset()
   vim.api.nvim_win_set_cursor(0, { row, col + offset })
 end
 
-vim.keymap.set("x", "<C-/>", start_search_offset, { remap = true })
+vim.keymap.set("n", "<C-/>", start_search_offset, { remap = true })
 vim.keymap.set("n", "<C-n>", next_search_offset, { remap = true })
