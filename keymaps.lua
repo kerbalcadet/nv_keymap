@@ -40,46 +40,17 @@ vim.keymap.set("x", "<M-L>", "ygvxEp/<C-r>+<cr>vgn")
 -- search / ctrl+d ish
 local search_text = ""
 local offset = 0
-
-local function esc(str)
-  return "\\V" .. str:gsub("\\", "\\\\")
-end
-
-local function get_selected_text()
-  return table.concat(vim.fn.getregion(vim.fn.getpos("'<"), vim.fn.getpos("'>"), { type = "v" }), "\n")
-end
-
 local function start_search_offset()
-  search_text = get_selected_text()
-  if search_text == "" then
-    return
-  end
-
-  local pattern = esc(search_text)
-
-  local _, match_col = unpack(vim.fn.searchpos(pattern, "Wn"))
-  if match_col == 0 then
-    return
-  end
-
-  local _, cursor_col = unpack(vim.api.nvim_win_get_cursor(0))
-  offset = (cursor_col + 1) - match_col
+  search_text = vim.fn.getreg("v")
+  local c_col = vim.api.nvim_win_get_cursor(0)[2]
+  local p_col = vim.fn.searchpos(search_text, "cn")[2]
+  offset = c_col - p_col
+  vim.cmd("normal! <esc>")
 end
 
 local function next_search_offset()
-  if search_text == "" then
-    return
-  end
-
-  local row, col = unpack(vim.fn.searchpos(esc(search_text), "W"))
-  if row == 0 or col == 0 then
-    return
-  end
-
-  vim.api.nvim_win_set_cursor(0, {
-    row,
-    math.max(0, (col - 1) + offset),
-  })
+  local row, col, _ = unpack(vim.fn.searchpos(search_text, "W"))
+  vim.api.nvim_win_set_cursor(0, { row, col + offset })
 end
 
 vim.keymap.set("x", "<C-/>", start_search_offset)
