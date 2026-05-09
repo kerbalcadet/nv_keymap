@@ -63,7 +63,7 @@ local function start_search_offset(search_text_)
   local p_col = vim.fn.searchpos(search_text, "bcW")[2]
   offset = c_col - p_col
 
-  vim.cmd.normal({ args = { "<esc>", (offset + 1) .. "l" } })
+  --  vim.cmd.normal({ args = { "<esc>", (offset + 1) .. "l" } })
   vim.fn.setreg("/", search_text)
   vim.cmd("set hlsearch")
 end
