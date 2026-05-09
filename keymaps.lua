@@ -59,7 +59,7 @@ local function start_search_offset(search_text_)
   vim.cmd.normal({ args = { "<esc>" } })
   vim.fn.setreg("/", search_text)
   vim.cmd("set hlsearch")
-  vim.cmd.normal(offset .. "l")
+  vim.cmd.normal((offset + 1) .. "l")
 end
 
 local function start_yanked_search_offset()
