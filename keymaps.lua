@@ -46,11 +46,9 @@ local function next_search_offset(fwd)
     fwd = false
   end
 
-  if fwd then
-    vim.cmd("/" .. search_text .. "/s+" .. offset)
-  else
-    vim.cmd("?" .. search_text .. "?b+" .. offset)
-  end
+  local flags = fwd and "W" or "bW"
+  local pos = vim.fn.searchpos(search_text, flags)
+  vim.api.nvim_win_set_cursor(0, { pos[1], pos[2] + offset })
 end
 
 local function start_search_offset(search_text_)
