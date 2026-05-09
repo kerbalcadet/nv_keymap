@@ -62,5 +62,5 @@ local function start_yanked_search_offset()
 end
 
 vim.keymap.set("n", "<C-/>", start_search_offset, { remap = true })
-vim.keymap.set("n", "<C-?>", start_yanked_search_offset, { remap = true })
+vim.keymap.set("n", "<C-M-/>", start_yanked_search_offset, { remap = true })
 vim.keymap.set("n", "<C-n>", next_search_offset, { remap = true })
