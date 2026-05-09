@@ -75,6 +75,6 @@ vim.keymap.set("n", "<C-n>", function()
   next_search_offset(true)
 end, { remap = true })
 
-vim.keymap.set("n", "<C-N>", function()
+vim.keymap.set("n", "<C-p>", function()
   next_search_offset(false)
 end, { remap = true })
