@@ -72,7 +72,13 @@ local function start_yanked_search_offset()
   start_search_offset(vim.fn.getreg("+"))
 end
 
+local function start_search_offset_visual()
+  vim.cmd("normal y `>")
+  start_yanked_search_offset()
+end
+
 vim.keymap.set("n", "<C-/>", start_search_offset, { remap = true })
+vim.keymap.set("x", "<C-/>", start_search_offset_visual, { remap = true })
 vim.keymap.set("n", "<C-M-/>", start_yanked_search_offset, { remap = true })
 vim.keymap.set("n", "<C-n>", function()
   next_search_offset(true)
