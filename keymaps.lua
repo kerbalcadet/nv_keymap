@@ -42,7 +42,9 @@ local search_text = ""
 local offset = 0
 
 local function next_search_offset(fwd)
-  fwd = (fwd == true)
+  if fwd == nil then
+    fwd = false
+  end
 
   if fwd then
     vim.cmd("/" .. search_text .. "/s+" .. offset)
