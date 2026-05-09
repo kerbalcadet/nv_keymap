@@ -73,7 +73,7 @@ local function start_yanked_search_offset()
 end
 
 local function start_search_offset_visual()
-  vim.cmd("normal y `>")
+  vim.cmd("normal y`>")
   start_yanked_search_offset()
 end
 
