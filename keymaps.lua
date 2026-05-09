@@ -58,7 +58,7 @@ local function start_search_offset(search_text_)
 
   vim.cmd.normal({ args = { "<esc>" } })
   vim.cmd.normal((offset + 1) .. "l")
-  vim.fn.setreg("@/", search_text)
+  vim.fn.setreg("/", search_text)
   vim.cmd("set hlsearch")
 end
 
