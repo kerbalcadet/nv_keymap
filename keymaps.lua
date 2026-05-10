@@ -77,8 +77,8 @@ local function start_search_offset_visual()
   start_yanked_search_offset()
 end
 
-vim.keymap.set("n", "<C-c>", ":let @/=expand('<cword>')<cr>ciw")
-vim.keymap.set("x", "<C-c>", "y:let @/='<C-r>+'<cr>gvc")
+vim.keymap.set("n", "<C-c>", ":let @/=expand('<cword>') | set hlsearch <cr>ciw")
+vim.keymap.set("x", "<C-c>", "y:let @/='<C-r>+' | set hlsearch <cr>gvc")
 vim.keymap.set("n", "<C-/>", start_search_offset, { remap = true })
 vim.keymap.set("x", "<C-/>", start_search_offset_visual, { remap = true })
 vim.keymap.set("n", "<C-M-/>", start_yanked_search_offset, { remap = true })
