@@ -8,7 +8,7 @@ vim.api.nvim_create_user_command(
   {}
 )
 vim.api.nvim_create_user_command("PullKeymap", "silent !(cd ~/.dotfiles/keymaps/ && git pull)", {})
-vim.cmd("PullKeymap")
+--vim.cmd("PullKeymap")
 --vim.cmd("PushKeymap")
 
 vim.keymap.set("t", "<C-n>", "<C-\\><C-n>")
