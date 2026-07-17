@@ -11,6 +11,8 @@ vim.api.nvim_create_user_command("PullKeymap", "silent !(cd ~/.dotfiles/keymaps/
 --vim.cmd("PullKeymap")
 --vim.cmd("PushKeymap")
 
+vim.keymap.set("n", "<leader>%", ":source %<cr>")
+
 vim.keymap.set("t", "<C-n>", "<C-\\><C-n>")
 vim.keymap.set("n", "<leader>gg", ":LazyGit<CR>")
 vim.keymap.set("n", "<M-w>", function()
