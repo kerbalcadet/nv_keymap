@@ -58,6 +58,7 @@ local function next_search_offset(fwd)
   if not fwd then
     local cpos = vim.api.nvim_win_get_cursor(0)
     vim.api.nvim_win_set_cursor(0, { cpos[1], cpos[2] - offset - 1 })
+    return
   end
 
   local flags = fwd and "" or "b"
@@ -87,14 +88,15 @@ local function start_search_offset_visual()
 end
 
 vim.keymap.set("n", "<C-c>", ":let @/=expand('<cword>') | set hlsearch <cr>ciw")
+vim.keymap.set("n", "c/", "cgn")
 vim.keymap.set("x", "<C-c>", "y:let @/='<C-r>+' | set hlsearch <cr>gvc")
 vim.keymap.set("n", "<C-/>", start_search_offset, { remap = true })
 vim.keymap.set("x", "<C-/>", start_search_offset_visual, { remap = true })
 vim.keymap.set("n", "<C-M-/>", start_yanked_search_offset, { remap = true })
-vim.keymap.set("n", "<C-n>", function()
+vim.keymap.set("n", "<M-n>", function()
   next_search_offset(true)
 end, { remap = true })
 
-vim.keymap.set("n", "<C-p>", function()
-  next_search_offset(false)
+vim.keymap.set("n", "<M-N>", function()
+  next_search_offset(true)
 end, { remap = true })
